@@ -18,7 +18,7 @@ const Header = props => {
   }
 
   return (
-    <div>
+    <div className="header-container">
       <nav className="nav-header">
         <div className="nav-content">
           <Link to="/">
@@ -57,6 +57,7 @@ const Header = props => {
           </div>
           <div className="nav-button-container">
             <button
+              label="text"
               type="button"
               className="logout-mobile-btn"
               onClick={onClickLogout}

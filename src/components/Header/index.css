@@ -1,3 +1,7 @@
+.header-container {
+  position: fixed;
+  width: 100%;
+}
 .nav-header {
   background-color: #272727;
   padding-left: 30px;

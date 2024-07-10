@@ -4,7 +4,9 @@
   align-items: center;
   background-color: #000000;
   background-size: cover;
-  min-height: 85vh;
+  min-height: 100vh;
+  overflow-y: auto;
+  padding-top: 100px;
 }
 .jobs-page-content {
   display: flex;

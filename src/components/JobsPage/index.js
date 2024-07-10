@@ -49,6 +49,14 @@ const salaryRangesList = [
   },
 ]
 
+const locationsList = [
+  {locationName: 'Hyderabad', locationId: 'HYB'},
+  {locationName: 'Bangalore', locationId: 'BNG'},
+  {locationName: 'Chennai', locationId: 'CHNI'},
+  {locationName: 'Delhi', locationId: 'DEH'},
+  {locationName: 'Mumbai', locationId: 'MI'},
+]
+
 const apiStatusConstants = {
   initial: 'INITIAL',
   success: 'SUCCESS',
@@ -63,6 +71,7 @@ class JobsPage extends Component {
     searchInput: '',
     employmentType: [],
     salaryRange: '',
+    locations: [],
   }
 
   componentDidMount() {
@@ -116,6 +125,11 @@ class JobsPage extends Component {
     </div>
   )
 
+  onClickRetry = () => {
+    // console.log("Retry Btn Clicked")
+    this.getJobList()
+  }
+
   renderFailureView = () => (
     <div className="jobs-error-view-container">
       <img
@@ -131,7 +145,7 @@ class JobsPage extends Component {
         type="button"
         className="jobs-failure-button"
         data-testid="button"
-        onClick={this.getJobs}
+        onClick={this.onClickRetry}
       >
         Retry
       </button>
@@ -139,14 +153,26 @@ class JobsPage extends Component {
   )
 
   renderJobsList = () => {
-    const {jobListData} = this.state
+    const {jobListData, locations} = this.state
+    // const {apiStatus, jobsList, loactions} = this.state
+    // console.log(loactions)
+    const filtredJobList = jobListData.filter(each => {
+      if (locations.length === 0) {
+        return each
+      }
+      if (locations.includes(each.location)) {
+        return each
+      }
+      return null
+    })
+    // console.log(filtredJobList)
     return (
       /** Using Shorthand or fragment syntax --- (<>...</>) */
       <>
-        {jobListData.length > 0 ? (
+        {filtredJobList.length > 0 ? (
           <div className="jobs-list-container">
             <ul className="jobs-list">
-              {jobListData.map(eachJob => (
+              {filtredJobList.map(eachJob => (
                 <JobCard jobData={eachJob} key={eachJob.id} />
               ))}
             </ul>
@@ -183,6 +209,20 @@ class JobsPage extends Component {
     }
   }
 
+  changeLocationType = location => {
+    // console.log(locationId)
+    const {locations} = this.state
+    let updatedLocations = locations
+    if (locations.includes(location)) {
+      updatedLocations = locations.filter(
+        eachLocation => eachLocation !== location,
+      )
+    } else {
+      updatedLocations = [...updatedLocations, location]
+    }
+    this.setState({locations: updatedLocations})
+  }
+
   updateSalaryRangeId = salaryRange => {
     // console.log(salaryRange)
     this.setState({salaryRange}, this.getJobList)
@@ -214,7 +254,6 @@ class JobsPage extends Component {
 
   render() {
     const {searchInput, salaryRange} = this.state
-
     return (
       /** Using Shorthand or fragment syntax --- (<>...</>) */
       <>
@@ -230,6 +269,8 @@ class JobsPage extends Component {
               changeEmployeeList={this.changeEmployeeList}
               salaryRange={salaryRange}
               updateSalaryRangeId={this.updateSalaryRangeId}
+              locationsList={locationsList}
+              changeLocationType={this.changeLocationType}
             />
             <div className="search-input-jobs-list-container">
               <div className="search-input-desktop-container">
@@ -242,6 +283,7 @@ class JobsPage extends Component {
                   onKeyDown={this.onEnterSearchInput}
                 />
                 <button
+                  label="text"
                   type="button"
                   className="search-button"
                   data-testid="searchButton"

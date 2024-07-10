@@ -60,11 +60,11 @@
   margin-bottom: 25px;
 }
 
-.employment-type-container {
+.filters-container {
   display: flex;
   flex-direction: column;
 }
-.employment-type-heading {
+.filters-heading {
   color: #ffffff;
   font-weight: 500;
   font-family: 'Roboto';
@@ -72,12 +72,10 @@
   margin: 0px;
   margin-bottom: 20px;
 }
-.employee-type-list-container {
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
+.filters-list-container {
+  list-style-type: none; 
 }
-.employee-item {
+.filter-item {
   display: flex;
   align-items: center;
   padding: 0px;
@@ -88,27 +86,4 @@
   color: #ffffff;
   margin-left: 6px;
   font-size: 18px;
-}
-.salary-range-container {
-  display: flex;
-  flex-direction: column;
-}
-.salary-range-heading {
-  color: #ffffff;
-  font-weight: 500;
-  font-family: 'Roboto';
-  font-size: 20px;
-  margin: 0px;
-  margin-bottom: 20px;
-}
-.salary-range-list-container {
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
-}
-.salary-item {
-  display: flex;
-  align-items: center;
-  padding: 0px;
-  margin-bottom: 15px;
 }

@@ -77,7 +77,7 @@ class ProfileDetails extends Component {
     return (
       <div className="profile-container">
         <img src={profileImageUrl} alt="profile" className="profile-img" />
-        <h1 className="profile-heading">Dheeraj Paik</h1>
+        <h1 className="profile-heading">{name}</h1>
         <p className="profile-bio">{shortBio}</p>
       </div>
     )
